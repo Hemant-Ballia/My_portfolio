@@ -1,0 +1,58 @@
+import { Project } from '@/types';
+
+export const projectsData: Project[] = [
+  {
+    id: 1,
+    title: 'Kishan Mitra',
+    description: 'Empowering farmers to set their own prices and connect with buyers. Includes crop info and community features.',
+    imageUrl: '/assets/kishan-mitra.png',
+    tags: ['React.js', 'Tailwind CSS', 'MongoDB', 'Express.js'],
+    githubUrl: 'https://github.com/Hemant-Ballia/kishan-mitra',
+    liveUrl: 'https://kishan-mitra-8l4k92667-hemant-chauhans-projects.vercel.app',
+  },
+  {
+    id: 2,
+    title: 'VigyBag',
+    description: 'E-commerce platform for eco-friendly products. Location-based search, category filters, and villager empowerment.',
+    imageUrl: '/assets/vb.png',
+    tags: ['React', 'Node.js', 'MongoDB', 'Tailwind CSS', 'Express.js'],
+    githubUrl: 'https://github.com/Hemant-Ballia/VigyBag',
+    liveUrl: 'https://vigy-bag.vercel.app/',
+  },
+  {
+    id: 3,
+    title: 'iTask - Smart Task Manager',
+    description: 'Responsive task manager with add, update, delete features. Uses Local Storage and supports dark mode.',
+    imageUrl: '/assets/todo-list.png',
+    tags: ['React', 'Tailwind CSS', 'Local Storage'],
+    githubUrl: 'https://github.com/Hemant-Ballia/-Todo-List-Web-Application',
+    liveUrl: 'https://todo-list-web-application-five.vercel.app',
+  },
+  {
+    id: 4,
+    title: 'Tic-Tac-Toe Challenge',
+    description: 'Classic game with single & multiplayer modes. Real-time score tracking, responsive UI, and game logic.',
+    imageUrl: '/assets/tic-tac-game.png',
+    tags: ['React', 'Tailwind CSS', 'JavaScript'],
+    githubUrl: 'https://github.com/Hemant-Ballia/tic-tac-toe-game',
+    liveUrl: 'https://tic-tac-toe-game-ten-nu.vercel.app',
+  },
+  {
+    id: 5,
+    title: 'Quiz App',
+    description: 'Modern quiz app with category selection, interactive questions, and performance analytics.',
+    imageUrl: '/assets/react-q.jpg',
+    tags: ['React', 'Tailwind CSS', 'JavaScript', 'Vite'],
+    githubUrl: 'https://github.com/hemantchauhan/portfolio',
+    liveUrl: 'https://react-quiz-app-six-delta.vercel.app',
+  },
+  {
+    id: 6,
+    title: 'Calculator App',
+    description: 'Basic calculator with arithmetic operations. Clean UI and responsive design.',
+    imageUrl: '/assets/calculator.png',
+    tags: ['HTML', 'CSS', 'JavaScript'],
+    githubUrl: 'https://github.com/Hemant-Ballia/calculator-project',
+    liveUrl: 'https://calculator-project-ten-cyan.vercel.app/',
+  },
+];
