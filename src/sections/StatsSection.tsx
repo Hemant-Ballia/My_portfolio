@@ -10,7 +10,7 @@ export default function StatsSection() {
     { label: 'Cities Served', value: '46', icon: 'map' },
   ];
 
-  const icons = {
+  const icons: Record<string, React.ReactNode> = {
     download: (
       <path d="M8 17l4 4 4-4m-4-5v9 M20.88 18.09A5 5 0 0018 9h-1.26A8 8 0 103 16.29" />
     ),

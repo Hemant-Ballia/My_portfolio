@@ -17,15 +17,14 @@ export default function ContactPage() {
               Get In Touch
             </h1>
             <p className="mt-4 text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              Have a question or a project in mind? Fill out the form below and I'll get back to you as soon as possible.
+              Have a question or a project in mind? Fill out the form below and I&apos;ll get back to you as soon as possible.
             </p>
           </div>
 
-          {/* Form ko center mein laane ke liye container */}
+          {/* Form ko center mein laane ke liye container */ }
           <div className="max-w-2xl mx-auto">
             <ContactForm />
           </div>
-          
         </div>
       </section>
     </main>

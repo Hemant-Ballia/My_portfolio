@@ -38,10 +38,10 @@ export default function ContactForm() {
       <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
         Contact Me
       </h2>
-      <form onSubmit={handleSubmit} ref={formRef} className="space-y-6">
+      <form onSubmit={ handleSubmit } ref={ formRef } className="space-y-6">
         <input type="hidden" name="access_key" value="52c6bd85-2a50-4c67-b5ca-b2fea6d0b992" />
 
-        {/* Full Name */}
+        {/* Full Name */ }
         <div>
           <label
             htmlFor="name"
@@ -59,7 +59,7 @@ export default function ContactForm() {
           />
         </div>
 
-        {/* Email */}
+        {/* Email */ }
         <div>
           <label
             htmlFor="email"
@@ -77,7 +77,7 @@ export default function ContactForm() {
           />
         </div>
 
-        {/* Message */}
+        {/* Message */ }
         <div>
           <label
             htmlFor="message"
@@ -89,13 +89,13 @@ export default function ContactForm() {
             name="message"
             id="message"
             required
-            rows={5}
+            rows={ 5 }
             placeholder="Hi Hemant, I'd like to discuss a project..."
             className="w-full px-4 py-3 bg-white/20 dark:bg-gray-800/30 border border-b-2 border-white/30 dark:border-gray-600/50 rounded-lg text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:outline-none focus:border-emerald-400 transition duration-300"
           ></textarea>
         </div>
 
-        {/* Submit Button */}
+        {/* Submit Button */ }
         <div className="text-center pt-4">
           <button
             type="submit"

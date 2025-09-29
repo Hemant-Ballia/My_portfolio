@@ -4,8 +4,18 @@ import BlogCard from '@/components/BlogCard';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
+type BlogPost = {
+  title: string;
+  summary: string;
+  date: string;
+  slug: string;
+  image?: string;
+  category?: string;
+  readTime?: string;
+};
+
 export default function BlogSection() {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState<BlogPost[]>([]);
 
   useEffect(() => {
     const fetchPosts = () => {
@@ -47,4 +57,3 @@ export default function BlogSection() {
     </section>
   );
 }
-//section>/BlogSection.tsx

@@ -57,7 +57,7 @@ export default function TestimonialSection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-16">
           { feedbacks.map((f, i) => (
             <motion.div
-              key={ i }
+              key={ f.name + i }
               initial={ { opacity: 0, y: 20 } }
               whileInView={ { opacity: 1, y: 0 } }
               viewport={ { once: true } }

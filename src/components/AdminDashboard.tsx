@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { FiTrash2, FiStar } from 'react-icons/fi';
 import { toast } from 'react-toastify';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 type Feedback = {
     id: number;
@@ -70,7 +71,13 @@ export default function AdminDashboard() {
                             {/* Avatar */ }
                             <div className="w-14 h-14 rounded-full overflow-hidden mb-4 bg-gray-300 dark:bg-gray-700 flex items-center justify-center text-white font-bold text-xl">
                                 { f.avatarUrl ? (
-                                    <img src={ f.avatarUrl } alt={ f.name } className="w-full h-full object-cover" />
+                                    <Image
+                                        src={ f.avatarUrl }
+                                        alt={ f.name }
+                                        width={ 56 }
+                                        height={ 56 }
+                                        className="w-full h-full object-cover"
+                                    />
                                 ) : (
                                     f.name.charAt(0)
                                 ) }

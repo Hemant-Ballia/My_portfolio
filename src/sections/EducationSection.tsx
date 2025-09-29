@@ -80,6 +80,8 @@ export default function EducationSection() {
                                 <a
                                     href={ item.link }
                                     target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label={ `View certificate for ${item.title}` }
                                     className="text-emerald-500 underline hover:text-emerald-400 transition-colors"
                                 >
                                     View Certificate

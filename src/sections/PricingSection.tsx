@@ -61,6 +61,7 @@ export default function PricingSection() {
 
             <Link
               href="/contact"
+              aria-label={ `Get Started with ${tier.title}` }
               className="w-full block text-center py-2 rounded-lg bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-600 hover:to-cyan-600 text-white font-semibold font-poppins transition"
             >
               Get Started

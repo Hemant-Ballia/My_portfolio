@@ -58,6 +58,7 @@ export default function SkillsSection() {
                 { skills.map((skill) => (
                     <div
                         key={ skill.name }
+                        aria-label={ `${skill.name} - ${skill.level} proficiency` }
                         className="flex flex-col items-center justify-center bg-white dark:bg-[#0d1117]/60 backdrop-blur-md border border-gray-200 dark:border-gray-700 rounded-xl p-5 shadow-md hover:shadow-indigo-500/20 transition-all duration-300"
                     >
                         <div className="text-3xl mb-2">{ skill.icon }</div>

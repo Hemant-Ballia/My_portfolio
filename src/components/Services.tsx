@@ -89,14 +89,23 @@ export default function Services() {
               {/* Icon */ }
               { plan.icon }
 
-              <h2 className={ `text-xl font-bold font-grotesk ${plan.isPopular ? 'text-white' : 'text-gray-900 dark:text-white'}` }>
+              <h2
+                className={ `text-xl font-bold font-grotesk ${plan.isPopular ? 'text-white' : 'text-gray-900 dark:text-white'
+                  }` }
+              >
                 { plan.name }
               </h2>
-              <p className={ `mt-2 text-sm font-poppins ${plan.isPopular ? 'text-gray-300' : 'text-gray-600 dark:text-gray-400'} flex-grow` }>
+              <p
+                className={ `mt-2 text-sm font-poppins ${plan.isPopular ? 'text-gray-300' : 'text-gray-600 dark:text-gray-400'
+                  } flex-grow` }
+              >
                 { plan.description }
               </p>
 
-              <div className={ `my-8 text-5xl font-extrabold font-montserrat ${plan.isPopular ? 'text-white' : 'text-gray-900 dark:text-white'}` }>
+              <div
+                className={ `my-8 text-5xl font-extrabold font-montserrat ${plan.isPopular ? 'text-white' : 'text-gray-900 dark:text-white'
+                  }` }
+              >
                 { plan.price !== 'Custom' ? (
                   <>
                     <span className="align-top text-2xl font-medium">Starting at </span>
@@ -111,7 +120,13 @@ export default function Services() {
                 { plan.features.map((feature) => (
                   <li key={ feature } className="flex items-center">
                     <FiCheckCircle className="text-emerald-500 mr-3" />
-                    <span className={ plan.isPopular ? 'text-gray-300 font-poppins' : 'text-gray-600 dark:text-gray-400 font-poppins' }>
+                    <span
+                      className={
+                        plan.isPopular
+                          ? 'text-gray-300 font-poppins'
+                          : 'text-gray-600 dark:text-gray-400 font-poppins'
+                      }
+                    >
                       { feature }
                     </span>
                   </li>
@@ -119,7 +134,7 @@ export default function Services() {
               </ul>
 
               <button
-                onClick={ () => toast.success(`Let's build your ${plan.name}!`) }
+                onClick={ () => toast.success(`Let&apos;s build your ${plan.name}!`) }
                 className={ `mt-auto w-full text-center font-semibold py-3 px-6 rounded-lg transition-colors duration-300 font-poppins ${plan.isPopular
                     ? 'bg-emerald-500 text-white hover:bg-emerald-600'
                     : 'bg-emerald-600/20 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-600/30'
@@ -133,8 +148,11 @@ export default function Services() {
 
         <div className="text-center mt-16">
           <p className="text-gray-600 dark:text-gray-400 font-poppins">
-            Don't see a plan that fits?{ ' ' }
-            <Link href="/contact" className="font-semibold text-emerald-600 dark:text-emerald-400 hover:underline">
+            Don&apos;t see a plan that fits?{ ' ' }
+            <Link
+              href="/contact"
+              className="font-semibold text-emerald-600 dark:text-emerald-400 hover:underline"
+            >
               Contact me for a custom quote.
             </Link>
           </p>
@@ -143,4 +161,4 @@ export default function Services() {
     </section>
   );
 }
-//components/ProjectCard.tsx
+// src/components/Services.tsx

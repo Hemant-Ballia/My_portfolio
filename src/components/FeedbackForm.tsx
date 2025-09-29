@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaStar, FaPaperPlane } from 'react-icons/fa';
 import { toast } from 'react-toastify';
+import Image from 'next/image';
 
 export default function FeedbackForm() {
   const [form, setForm] = useState({
@@ -112,10 +113,12 @@ export default function FeedbackForm() {
         {/* Avatar Preview */ }
         { form.avatarUrl && (
           <div className="flex justify-center mt-2">
-            <img
+            <Image
               src={ form.avatarUrl }
               alt="Avatar Preview"
-              className="w-16 h-16 rounded-full object-cover border border-gray-300 dark:border-gray-600"
+              width={ 64 }
+              height={ 64 }
+              className="rounded-full object-cover border border-gray-300 dark:border-gray-600"
             />
           </div>
         ) }

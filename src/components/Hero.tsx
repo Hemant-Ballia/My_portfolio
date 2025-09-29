@@ -23,8 +23,11 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-900 via-black to-gray-950 text-white"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-tr from-[#0f172a] to-[#020617] text-white"
     >
+      {/* Glass overlay */ }
+      <div className="absolute inset-0 bg-white/5 dark:bg-black/10 backdrop-blur-xl z-0" />
+
       {/* Animated gradient blobs */ }
       <div className="absolute top-0 -left-20 w-[500px] h-[500px] bg-gradient-to-tr from-cyan-500 to-blue-600 rounded-full blur-3xl opacity-30 animate-pulse-slow" />
       <div className="absolute bottom-0 -right-20 w-[400px] h-[400px] bg-gradient-to-tr from-purple-500 to-pink-600 rounded-full blur-3xl opacity-30 animate-pulse-slow" />

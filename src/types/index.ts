@@ -24,6 +24,10 @@ export interface Testimonial {
 
 // ✅ Structure for each blog post
 export interface BlogPost {
+  readTime: any;
+  category: any;
+  author: any;
+  body: any;
   title: string;
   summary: string;
   date: string;

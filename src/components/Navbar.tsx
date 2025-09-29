@@ -1,10 +1,11 @@
 'use client';
 
-import { useState, useEffect } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useTheme } from "next-themes";
-import { motion, AnimatePresence, Variants } from "framer-motion";
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { usePathname } from 'next/navigation';
+import { useTheme } from 'next-themes';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 import {
   FiMenu,
   FiX,
@@ -13,24 +14,24 @@ import {
   FiGithub,
   FiLinkedin,
   FiDownload,
-} from "react-icons/fi";
+} from 'react-icons/fi';
 
 const navItems = [
-  { label: "Home", href: "/" },
-  { label: "Projects", href: "/projects" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
+  { label: 'Home', href: '/' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 const socialLinks = [
   {
-    label: "GitHub",
-    href: "https://github.com/Hemant-Ballia",
+    label: 'GitHub',
+    href: 'https://github.com/Hemant-Ballia',
     icon: FiGithub,
   },
   {
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/in/hemant-chauhan-839a41322/",
+    label: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/hemant-chauhan-839a41322/',
     icon: FiLinkedin,
   },
 ];
@@ -38,16 +39,18 @@ const socialLinks = [
 const Logo = () => (
   <Link href="/" aria-label="Back to Homepage">
     <div className="flex items-center justify-center w-10 h-10 rounded-full overflow-hidden bg-gray-900 dark:bg-slate-200 border-2 border-white dark:border-gray-900 shadow-md">
-      <img
+      <Image
         src="/assets/pic.jpg"
         alt="Hemant Chauhan"
-        className="w-full h-full object-cover rounded-full"
+        width={ 40 }
+        height={ 40 }
+        className="object-cover rounded-full"
       />
     </div>
   </Link>
 );
 
-const ResumeButton = ({ className = "" }) => (
+const ResumeButton = ({ className = '' }) => (
   <Link
     href="/resume.pdf"
     target="_blank"
@@ -74,12 +77,12 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = isOpen ? "hidden" : "auto";
+    document.body.style.overflow = isOpen ? 'hidden' : 'auto';
   }, [isOpen]);
 
   if (!mounted) return null;
@@ -88,20 +91,20 @@ export default function Navbar() {
     open: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.3, ease: "easeOut" },
+      transition: { duration: 0.3, ease: 'easeOut' },
     },
     closed: {
       opacity: 0,
-      y: "-10%",
-      transition: { duration: 0.2, ease: "easeIn" },
+      y: '-10%',
+      transition: { duration: 0.2, ease: 'easeIn' },
     },
   };
 
   return (
     <header
       className={ `sticky top-0 z-50 transition-all duration-300 ${isScrolled
-          ? "bg-white/80 dark:bg-gray-950/80 backdrop-blur-lg shadow-md"
-          : "bg-white dark:bg-gray-950"
+          ? 'bg-white/80 dark:bg-gray-950/80 backdrop-blur-lg shadow-md'
+          : 'bg-white dark:bg-gray-950'
         }` }
     >
       <div className="max-w-5xl mx-auto flex items-center justify-between px-4 py-3 md:px-6">
@@ -114,10 +117,10 @@ export default function Navbar() {
               <li key={ label }>
                 <Link
                   href={ href }
-                  aria-current={ pathname === href ? "page" : undefined }
+                  aria-current={ pathname === href ? 'page' : undefined }
                   className={ `relative px-3 py-2 transition-colors duration-300 rounded-lg ${pathname === href
-                      ? "text-cyan-500 dark:text-cyan-400 font-semibold"
-                      : "text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800"
+                      ? 'text-cyan-500 dark:text-cyan-400 font-semibold'
+                      : 'text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800'
                     }` }
                 >
                   { label }
@@ -125,7 +128,7 @@ export default function Navbar() {
                     <motion.div
                       className="absolute bottom-0 left-0 right-0 h-0.5 bg-cyan-500 dark:bg-cyan-400"
                       layoutId="underline"
-                      transition={ { type: "spring", stiffness: 380, damping: 30 } }
+                      transition={ { type: 'spring', stiffness: 380, damping: 30 } }
                     />
                   ) }
                 </Link>
@@ -149,11 +152,11 @@ export default function Navbar() {
             </a>
           )) }
           <button
-            onClick={ () => setTheme(theme === "dark" ? "light" : "dark") }
+            onClick={ () => setTheme(theme === 'dark' ? 'light' : 'dark') }
             aria-label="Toggle Theme"
             className="p-2 rounded-full text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
           >
-            { theme === "dark" ? <FiSun size={ 22 } /> : <FiMoon size={ 22 } /> }
+            { theme === 'dark' ? <FiSun size={ 22 } /> : <FiMoon size={ 22 } /> }
           </button>
           <ResumeButton />
         </div>
@@ -185,10 +188,10 @@ export default function Navbar() {
                   key={ label }
                   href={ href }
                   onClick={ () => setIsOpen(false) }
-                  aria-current={ pathname === href ? "page" : undefined }
+                  aria-current={ pathname === href ? 'page' : undefined }
                   className={ `text-2xl w-full text-center transition-colors ${pathname === href
-                      ? "font-bold text-cyan-500 dark:text-cyan-400"
-                      : "text-gray-700 dark:text-gray-300 hover:text-cyan-500 dark:hover:text-cyan-400"
+                      ? 'font-bold text-cyan-500 dark:text-cyan-400'
+                      : 'text-gray-700 dark:text-gray-300 hover:text-cyan-500 dark:hover:text-cyan-400'
                     }` }
                 >
                   { label }
@@ -209,11 +212,11 @@ export default function Navbar() {
                   </a>
                 )) }
                 <button
-                  onClick={ () => setTheme(theme === "dark" ? "light" : "dark") }
+                  onClick={ () => setTheme(theme === 'dark' ? 'light' : 'dark') }
                   aria-label="Toggle Theme"
                   className="p-2 rounded-full text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
                 >
-                  { theme === "dark" ? <FiSun size={ 28 } /> : <FiMoon size={ 28 } /> }
+                  { theme === 'dark' ? <FiSun size={ 28 } /> : <FiMoon size={ 28 } /> }
                 </button>
               </div>
               <ResumeButton className="mt-6 w-full max-w-xs text-lg" />

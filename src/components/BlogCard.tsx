@@ -31,8 +31,8 @@ export default function BlogCard({ title, summary, date, slug, image, category, 
         { image && (
           <div className="relative w-full h-52 overflow-hidden">
             <Image
-              src={ image }
-              alt={ title }
+              src={ image || '/assets/default-blog.png' }
+              alt={ title || 'Blog preview' }
               fill
               className="object-cover transition-transform duration-500 group-hover:scale-105"
             />

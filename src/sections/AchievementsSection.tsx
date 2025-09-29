@@ -4,22 +4,22 @@ import { motion } from 'framer-motion';
 
 const achievements = [
     {
-        title: 'Python Full Stack Certification – IIT Patna · 2023',
+        title: 'Foundation level Certificate – IIT Patna · 2025',
     },
     {
-        title: 'Hack-n-Tech Finalist – IIT Patna · 2022',
+        title: 'Hack-n-Tech Finalist – IIT Patna · 2025',
     },
     {
-        title: 'ISRO Remote Sensing Workshop – 2021',
+        title: 'ISRO Remote Sensing Workshop – 2024',
     },
     {
-        title: 'Google Arcade Challenge – Completed · 2023',
+        title: 'Google Arcade Challenge – Completed · 2025',
     },
     {
-        title: 'Open Source Contributor – GitHub · 2022–2024',
+        title: 'Open Source Contributor – GitHub · 2025–2026',
     },
     {
-        title: 'Inspire Award – DST, Govt. of India · 2018',
+        title: 'Inspire Award – DST, Govt. of India · 2023',
         link: '/assets/certificates/inspire.pdf',
     },
 ];
@@ -53,6 +53,8 @@ export default function AchievementsSection() {
                             <a
                                 href={ item.link }
                                 target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label={ `Download certificate for ${item.title}` }
                                 className="mt-2 inline-block text-emerald-500 underline hover:text-emerald-400 transition-colors text-sm font-poppins"
                             >
                                 View Certificate

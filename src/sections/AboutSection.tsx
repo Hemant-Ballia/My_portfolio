@@ -71,7 +71,6 @@ export default function AboutSection() {
 
   return (
     <section className="bg-white dark:bg-gray-950 text-gray-800 dark:text-gray-200 px-6 py-16 sm:py-24">
-
       {/* --- Introduction --- */ }
       <motion.header
         className="text-center max-w-5xl mx-auto"
@@ -91,7 +90,7 @@ export default function AboutSection() {
           Hemant Chauhan
         </h1>
         <p className="text-lg max-w-3xl mx-auto leading-relaxed text-gray-700 dark:text-gray-300">
-          I'm an undergraduate at <span className="font-semibold text-emerald-600 dark:text-emerald-400">IIT Patna</span>, specializing in Computer Science & Data Analytics. My passion lies in <span className="font-semibold text-emerald-600 dark:text-emerald-400">full-stack web development</span> and <span className="font-semibold text-emerald-600 dark:text-emerald-400">data-driven problem solving</span>. With a CPI above 9.18 and recognition as an INSPIRE Scholar, I aim to build tech that creates real-world impact.
+          I&apos;m an undergraduate at <span className="font-semibold text-emerald-600 dark:text-emerald-400">IIT Patna</span>, specializing in Computer Science & Data Analytics. My passion lies in <span className="font-semibold text-emerald-600 dark:text-emerald-400">full-stack web development</span> and <span className="font-semibold text-emerald-600 dark:text-emerald-400">data-driven problem solving</span>. With a CPI above 9.18 and recognition as an INSPIRE Scholar, I aim to build tech that creates real-world impact.
         </p>
       </motion.header>
 

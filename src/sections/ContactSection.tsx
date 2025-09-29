@@ -38,7 +38,7 @@ export default function ContactForm() {
       } else {
         throw new Error('Submission failed');
       }
-    } catch (error) {
+    } catch {
       toast.error('Something went wrong. Please try again.');
     } finally {
       setSubmitting(false);
@@ -52,11 +52,11 @@ export default function ContactForm() {
       </h2>
 
       <AnimatePresence>
-        {showSuccess && (
+        { showSuccess && (
           <motion.div
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0, opacity: 0 }}
+            initial={ { scale: 0, opacity: 0 } }
+            animate={ { scale: 1, opacity: 1 } }
+            exit={ { scale: 0, opacity: 0 } }
             className="mb-6 flex items-center justify-center text-emerald-500"
             aria-live="polite"
           >
@@ -66,20 +66,19 @@ export default function ContactForm() {
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              strokeWidth={2}
+              strokeWidth={ 2 }
             >
               <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
             </svg>
             <span className="ml-3 text-lg font-semibold">Message Sent!</span>
           </motion.div>
-        )}
+        ) }
       </AnimatePresence>
 
-      <form onSubmit={handleSubmit} ref={formRef} className="space-y-6" aria-label="Contact form">
-        <input type="hidden" name="access_key" value={WEB3FORM_KEY} />
+      <form onSubmit={ handleSubmit } ref={ formRef } className="space-y-6" aria-label="Contact form">
         <input type="text" name="botcheck" className="hidden" />
 
-        {/* Full Name */}
+        {/* Full Name */ }
         <div>
           <label htmlFor="name" className="block text-sm font-semibold tracking-wide text-gray-800 dark:text-gray-200 mb-2">
             Full Name
@@ -94,7 +93,7 @@ export default function ContactForm() {
           />
         </div>
 
-        {/* Email */}
+        {/* Email */ }
         <div>
           <label htmlFor="email" className="block text-sm font-semibold tracking-wide text-gray-800 dark:text-gray-200 mb-2">
             Email Address
@@ -109,7 +108,7 @@ export default function ContactForm() {
           />
         </div>
 
-        {/* Subject */}
+        {/* Subject */ }
         <div>
           <label htmlFor="subject" className="block text-sm font-semibold tracking-wide text-gray-800 dark:text-gray-200 mb-2">
             Subject
@@ -123,7 +122,7 @@ export default function ContactForm() {
           />
         </div>
 
-        {/* Message */}
+        {/* Message */ }
         <div>
           <label htmlFor="message" className="block text-sm font-semibold tracking-wide text-gray-800 dark:text-gray-200 mb-2">
             Your Message
@@ -132,25 +131,25 @@ export default function ContactForm() {
             name="message"
             id="message"
             required
-            rows={5}
+            rows={ 5 }
             placeholder="Hi Hemant, I'd like to discuss a project..."
             className="w-full px-4 py-3 bg-white/20 dark:bg-gray-800/30 border border-b-2 border-white/30 dark:border-gray-600/50 rounded-lg text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:outline-none focus:border-emerald-400 transition duration-300"
           ></textarea>
         </div>
 
-        {/* Submit Button */}
+        {/* Submit Button */ }
         <div className="text-center pt-4">
           <button
             type="submit"
-            disabled={submitting}
-            className={`w-full px-8 py-3 font-bold text-white inline-flex items-center justify-center rounded-lg shadow-lg transition-all duration-300 ${
-              submitting
+            disabled={ submitting }
+            aria-label="Send contact message"
+            className={ `w-full px-8 py-3 font-bold text-white inline-flex items-center justify-center rounded-lg shadow-lg transition-all duration-300 ${submitting
                 ? 'bg-gray-400 cursor-not-allowed'
                 : 'bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-600 hover:to-cyan-600 hover:shadow-xl transform hover:scale-105 active:scale-95'
-            }`}
+              }` }
           >
             <FiSend className="w-5 h-5 mr-2" />
-            {submitting ? 'Sending...' : 'Send Message'}
+            { submitting ? 'Sending...' : 'Send Message' }
           </button>
         </div>
       </form>

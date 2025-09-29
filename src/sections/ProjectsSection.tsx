@@ -69,7 +69,7 @@ const projects = [
   },
 ];
 
-const techIcons: Record<string, JSX.Element> = {
+const techIcons: Record<string, React.ReactNode> = {
   React: <SiReact className="text-cyan-500 w-5 h-5" />,
   'Node.js': <SiNodedotjs className="text-green-600 w-5 h-5" />,
   MongoDB: <SiMongodb className="text-green-500 w-5 h-5" />,
@@ -82,6 +82,7 @@ const techIcons: Record<string, JSX.Element> = {
   CSS: <SiCss3 className="text-blue-500 w-5 h-5" />,
   Vite: <FiExternalLink className="w-5 h-5 text-purple-500" />,
 };
+
 
 export default function ProjectsSection() {
   return (
@@ -96,13 +97,13 @@ export default function ProjectsSection() {
       </motion.h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        { projects.map((proj, i) => (
+        { projects.map((proj) => (
           <motion.div
-            key={ i }
+            key={ proj.title }
             initial={ { opacity: 0, y: 30 } }
             whileInView={ { opacity: 1, y: 0 } }
             viewport={ { once: true } }
-            transition={ { delay: i * 0.2 } }
+            transition={ { duration: 0.5 } }
             className="bg-white/5 dark:bg-[#0d1117]/60 backdrop-blur-md border border-gray-800 rounded-xl shadow-lg hover:shadow-cyan-500/20 transition-all duration-300 hover:-translate-y-2"
           >
             <div className="relative h-56">
@@ -138,6 +139,7 @@ export default function ProjectsSection() {
                   href={ proj.github }
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={ `GitHub repository for ${proj.title}` }
                   className="flex items-center gap-1 text-cyan-600 dark:text-cyan-400 hover:underline"
                 >
                   <FiGithub /> GitHub
@@ -146,6 +148,7 @@ export default function ProjectsSection() {
                   href={ proj.demo }
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={ `Live demo of ${proj.title}` }
                   className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 hover:underline"
                 >
                   <FiExternalLink /> Live Demo

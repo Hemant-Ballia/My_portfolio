@@ -1,4 +1,5 @@
 import { FaStar } from 'react-icons/fa';
+import Image from 'next/image';
 
 type Props = {
   name: string;
@@ -14,7 +15,13 @@ export default function Testimonial({ name, role, quote, rating = 4, avatarUrl }
       {/* Avatar */ }
       <div className="w-16 h-16 rounded-full overflow-hidden mb-4 bg-gray-300 dark:bg-gray-700 flex items-center justify-center text-white font-bold text-xl">
         { avatarUrl ? (
-          <img src={ avatarUrl } alt={ name } className="w-full h-full object-cover" />
+          <Image
+            src={ avatarUrl }
+            alt={ name }
+            width={ 64 }
+            height={ 64 }
+            className="w-full h-full object-cover"
+          />
         ) : (
           name.charAt(0)
         ) }

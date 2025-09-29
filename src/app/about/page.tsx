@@ -1,4 +1,3 @@
-// src/app/about/page.tsx
 import { generateMeta } from '@/utils/seo';
 import AboutSection from '@/sections/AboutSection';
 
@@ -7,7 +6,7 @@ export const metadata = generateMeta({
   description:
     'Learn more about Hemant Chauhan, a full-stack developer and creative technologist from IIT Patna.',
   url: 'https://hemantweb.in/about',
-  image: 'https://hemantweb.in/assets/img.png', // apna OG image link daalna
+  image: 'https://hemantweb.in/assets/img.png',
   keywords: [
     'Hemant Chauhan',
     'Full Stack Developer',
