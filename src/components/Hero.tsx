@@ -142,9 +142,7 @@ export default function Hero() {
           </div>
 
           {/* small chat badge (optional) */ }
-          <div className="absolute bottom-2 right-4 hidden sm:flex items-center gap-2 bg-cyan-600 text-white text-xs px-3 py-1 rounded-full shadow">
-            Chat with me
-          </div>
+       
         </motion.div>
       </motion.div>
     </section>
