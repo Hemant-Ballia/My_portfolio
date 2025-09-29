@@ -79,7 +79,7 @@ export default function AboutSection() {
         transition={ { duration: 0.6 } }
       >
         <Image
-          src="/assets/img.png"
+          src="/assets/img.jpg"
           alt="Portrait of Hemant Chauhan"
           width={ 160 }
           height={ 160 }
