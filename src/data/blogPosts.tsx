@@ -8,9 +8,9 @@ export const blogPosts: BlogPost[] = [
     date: 'September 20, 2025',
     slug: 'kishan-mitra-case-study',
     image: '/assets/k-s-hh.png',
-    // category: 'Case Study',
-    // readTime: '5 min read',
-    // author: 'Hemant Chauhan',
+    category: 'Case Study',
+    readTime: '5 min read',
+    author: 'Hemant Chauhan',
     content: (
       <>
         <p className="lead">

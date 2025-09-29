@@ -1,4 +1,5 @@
 // 📁 src/types/index.ts
+import type { JSX } from 'react';
 
 // ✅ Structure for each project in your portfolio
 export interface Project {
@@ -21,17 +22,15 @@ export interface Testimonial {
   rating?: number; // ⭐ Add this
 }
 
-
 // ✅ Structure for each blog post
 export interface BlogPost {
-  readTime: any;
-  category: any;
-  author: any;
-  body: any;
   title: string;
   summary: string;
   date: string;
   slug: string;
-  image: string;
+  image?: string;
+  category?: string;
+  readTime?: string;
+  author?: string;
   content: JSX.Element;
 }
