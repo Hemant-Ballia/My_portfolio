@@ -16,12 +16,20 @@ type BlogPost = {
 
 export default function BlogSection() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchPosts = () => {
-      fetch('/api/live-blog')
-        .then((res) => res.json())
-        .then((data) => setPosts(data));
+    const fetchPosts = async () => {
+      try {
+        const res = await fetch('/api/live-blog', { cache: 'no-store' });
+        if (!res.ok) throw new Error(`Network response was not ok: ${res.status}`);
+        const data: BlogPost[] = await res.json();
+        setPosts(data);
+        setError(null);
+      } catch (err) {
+        console.error('Failed to fetch posts:', err);
+        setError('Unable to load blog posts. Please try again later.');
+      }
     };
 
     fetchPosts(); // initial load
@@ -40,6 +48,10 @@ export default function BlogSection() {
       >
         Live <span className="text-cyan-500">Blog</span>
       </motion.h2>
+
+      { error && (
+        <p className="text-center text-red-500 mb-6">{ error }</p>
+      ) }
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
         { posts.map((post, i) => (

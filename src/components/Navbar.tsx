@@ -37,8 +37,8 @@ const socialLinks = [
 ];
 
 const Logo = () => (
-  <Link href="/" aria-label="Back to Homepage">
-    <div className="flex items-center justify-center w-10 h-10 rounded-full overflow-hidden bg-gray-900 dark:bg-slate-200 border-2 border-white dark:border-gray-900 shadow-md">
+  <Link href="/" aria-label="Back to Homepage" className="flex items-center">
+    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden bg-gray-900 dark:bg-slate-200 border-2 border-white dark:border-gray-900 shadow-sm">
       <Image
         src="/assets/pic.jpg"
         alt="Hemant Chauhan"
@@ -50,15 +50,15 @@ const Logo = () => (
   </Link>
 );
 
-const ResumeButton = ({ className = '' }) => (
+const ResumeButton = ({ className = '' }: { className?: string }) => (
   <Link
     href="/assets/resume.pdf"
     target="_blank"
     rel="noopener noreferrer"
-    className={ `inline-flex items-center gap-2 px-4 py-2 text-sm sm:text-base rounded-lg transition-all duration-300 border-2 
+    className={ `inline-flex items-center gap-2 px-3 py-2 sm:px-4 sm:py-2 text-sm sm:text-base rounded-lg transition-transform duration-150 border-2 
       text-cyan-500 border-cyan-500 
       hover:bg-cyan-500/10 dark:hover:bg-cyan-400/10
-      transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-cyan-400
+      transform hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400
       ${className}` }
   >
     <FiDownload />
@@ -75,7 +75,7 @@ export default function Navbar() {
 
   useEffect(() => setMounted(true), []);
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    const handleScroll = () => setIsScrolled(window.scrollY > 16);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -86,48 +86,40 @@ export default function Navbar() {
   if (!mounted) return null;
 
   const mobileMenuVariants: Variants = {
-    open: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.3, ease: 'easeOut' },
-    },
-    closed: {
-      opacity: 0,
-      y: '-10%',
-      transition: { duration: 0.2, ease: 'easeIn' },
-    },
+    open: { opacity: 1, y: 0, transition: { duration: 0.28, ease: 'easeOut' } },
+    closed: { opacity: 0, y: '-6%', transition: { duration: 0.18, ease: 'easeIn' } },
   };
 
   return (
     <header
       aria-label="Main navigation"
       className={ `sticky top-0 z-50 transition-all duration-300 ${isScrolled
-          ? 'bg-white/80 dark:bg-gray-950/80 backdrop-blur-lg shadow-md'
-          : 'bg-white dark:bg-gray-950'
+          ? 'bg-white/90 dark:bg-gray-950/90 backdrop-blur-md shadow-sm'
+          : 'bg-transparent dark:bg-transparent'
         }` }
     >
-      <div className="w-full max-w-7xl mx-auto flex items-center justify-between px-4 py-3 sm:px-6">
+      <div className="w-full max-w-7xl mx-auto flex items-center justify-between px-3 sm:px-6 py-2 sm:py-3">
         <Logo />
 
         {/* Desktop Navigation */ }
         <nav className="hidden md:flex items-center">
-          <ul className="flex items-center space-x-2 text-base lg:text-lg font-grotesk">
+          <ul className="flex items-center space-x-1 sm:space-x-3 text-sm sm:text-base lg:text-lg">
             { navItems.map(({ label, href }) => (
               <li key={ label }>
                 <Link
                   href={ href }
                   aria-current={ pathname === href ? 'page' : undefined }
-                  className={ `relative px-3 py-2 transition-colors duration-300 rounded-lg ${pathname === href
-                      ? 'text-cyan-500 dark:text-cyan-400 font-semibold'
-                      : 'text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800'
+                  className={ `relative px-2 sm:px-3 py-1 rounded-md transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 ${pathname === href
+                      ? 'text-cyan-600 dark:text-cyan-400 font-semibold'
+                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
                     }` }
                 >
                   { label }
                   { pathname === href && (
                     <motion.div
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-cyan-500 dark:bg-cyan-400"
+                      className="absolute -bottom-1 left-3 right-3 h-0.5 bg-cyan-500 dark:bg-cyan-400 rounded"
                       layoutId="underline"
-                      transition={ { type: 'spring', stiffness: 380, damping: 30 } }
+                      transition={ { type: 'spring', stiffness: 400, damping: 28 } }
                     />
                   ) }
                 </Link>
@@ -137,37 +129,41 @@ export default function Navbar() {
         </nav>
 
         {/* Desktop Actions */ }
-        <div className="hidden md:flex items-center space-x-4 font-nunito">
-          { socialLinks.map(({ label, href, icon: Icon }) => (
-            <a
-              key={ label }
-              href={ href }
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={ label }
-              className="p-2 rounded-full text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition"
-            >
-              <Icon size={ 22 } />
-            </a>
-          )) }
+        <div className="hidden md:flex items-center space-x-3">
+          <div className="flex items-center space-x-2">
+            { socialLinks.map(({ label, href, icon: Icon }) => (
+              <a
+                key={ label }
+                href={ href }
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={ label }
+                className="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition"
+              >
+                <Icon size={ 20 } />
+              </a>
+            )) }
+          </div>
+
           <button
             onClick={ () => setTheme(theme === 'dark' ? 'light' : 'dark') }
             aria-label="Toggle Theme"
-            className="p-2 rounded-full text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+            className="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition"
           >
-            { theme === 'dark' ? <FiSun size={ 22 } /> : <FiMoon size={ 22 } /> }
+            { theme === 'dark' ? <FiSun size={ 18 } /> : <FiMoon size={ 18 } /> }
           </button>
+
           <ResumeButton />
         </div>
 
         {/* Mobile Menu Button */ }
         <button
-          onClick={ () => setIsOpen(!isOpen) }
+          onClick={ () => setIsOpen((s) => !s) }
           aria-label="Toggle Menu"
           aria-expanded={ isOpen }
-          className="p-2 rounded-md text-gray-600 dark:text-gray-300 md:hidden z-50"
+          className="p-2 rounded-md text-gray-700 dark:text-gray-200 md:hidden z-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300"
         >
-          { isOpen ? <FiX size={ 24 } /> : <FiMenu size={ 24 } /> }
+          { isOpen ? <FiX size={ 22 } /> : <FiMenu size={ 22 } /> }
         </button>
       </div>
 
@@ -179,47 +175,70 @@ export default function Navbar() {
             animate="open"
             exit="closed"
             variants={ mobileMenuVariants }
-            className="absolute top-0 left-0 w-full h-screen overflow-y-auto bg-white/95 dark:bg-gray-950/95 backdrop-blur-md md:hidden"
+            className="fixed inset-0 z-40 bg-white/95 dark:bg-gray-950/95 backdrop-blur-sm md:hidden"
           >
-            <nav className="flex flex-col items-center justify-center h-full space-y-6 px-6 text-center">
-              { navItems.map(({ label, href }) => (
-                <Link
-                  key={ label }
-                  href={ href }
-                  onClick={ () => setIsOpen(false) }
-                  aria-current={ pathname === href ? 'page' : undefined }
-                  className={ `text-2xl w-full transition-colors ${pathname === href
-                      ? 'font-bold text-cyan-500 dark:text-cyan-400'
-                      : 'text-gray-700 dark:text-gray-300 hover:text-cyan-500 dark:hover:text-cyan-400'
-                    }` }
-                >
-                  { label }
-                </Link>
-              )) }
-              <div className="border-t border-gray-200 dark:border-gray-700 w-1/2 my-4" />
-              <div className="flex items-center justify-center gap-6">
-                { socialLinks.map(({ label, href, icon: Icon }) => (
-                  <a
+            <div className="max-w-md mx-auto h-full flex flex-col px-6 py-8">
+              <div className="flex items-center justify-between mb-6">
+                <Logo />
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={ () => setTheme(theme === 'dark' ? 'light' : 'dark') }
+                    aria-label="Toggle Theme"
+                    className="p-2 rounded-md text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition"
+                  >
+                    { theme === 'dark' ? <FiSun size={ 18 } /> : <FiMoon size={ 18 } /> }
+                  </button>
+                  <button
+                    onClick={ () => setIsOpen(false) }
+                    aria-label="Close Menu"
+                    className="p-2 rounded-md text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition"
+                  >
+                    <FiX size={ 20 } />
+                  </button>
+                </div>
+              </div>
+
+              <nav className="flex-1 flex flex-col justify-center items-stretch gap-5">
+                { navItems.map(({ label, href }) => (
+                  <Link
                     key={ label }
                     href={ href }
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={ label }
-                    className="p-2 rounded-full text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition"
+                    onClick={ () => setIsOpen(false) }
+                    className={ `block text-center py-3 rounded-md text-lg font-medium transition-colors ${pathname === href
+                        ? 'text-cyan-600 dark:text-cyan-400'
+                        : 'text-gray-800 dark:text-gray-200 hover:text-cyan-600 dark:hover:text-cyan-400'
+                      }` }
                   >
-                    <Icon size={ 28 } />
-                  </a>
+                    { label }
+                  </Link>
                 )) }
-                <button
-                  onClick={ () => setTheme(theme === 'dark' ? 'light' : 'dark') }
-                  aria-label="Toggle Theme"
-                  className="p-2 rounded-full text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition"
-                >
-                  { theme === 'dark' ? <FiSun size={ 28 } /> : <FiMoon size={ 28 } /> }
-                </button>
+              </nav>
+
+              <div className="border-t border-gray-200 dark:border-gray-800 mt-6 pt-6">
+                <div className="flex items-center justify-center gap-4 mb-4">
+                  { socialLinks.map(({ label, href, icon: Icon }) => (
+                    <a
+                      key={ label }
+                      href={ href }
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={ label }
+                      className="p-2 rounded-full text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition"
+                    >
+                      <Icon size={ 22 } />
+                    </a>
+                  )) }
+                </div>
+
+                <div className="flex flex-col gap-3">
+                  <ResumeButton className="w-full" />
+                </div>
+
+                <div className="text-center mt-6 text-sm text-gray-500 dark:text-gray-400">
+                  © { new Date().getFullYear() } Hemant Chauhan
+                </div>
               </div>
-              <ResumeButton className="mt-6 w-full max-w-xs text-base sm:text-lg" />
-            </nav>
+            </div>
           </motion.div>
         ) }
       </AnimatePresence>
