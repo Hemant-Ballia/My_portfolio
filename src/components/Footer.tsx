@@ -46,7 +46,7 @@ export default function Footer() {
           <div>
             <Link href="/" className="flex items-center space-x-3">
               <Image
-                src="/assets/img.png"
+                src="/assets/img.jpg"
                 alt="Hemant Chauhan"
                 width={ 45 }
                 height={ 45 }
