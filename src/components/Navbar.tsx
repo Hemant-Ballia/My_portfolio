@@ -52,10 +52,10 @@ const Logo = () => (
 
 const ResumeButton = ({ className = '' }) => (
   <Link
-    href="/resume.pdf"
+    href="/assets/resume.pdf"
     target="_blank"
     rel="noopener noreferrer"
-    className={ `inline-flex items-center gap-2 px-4 py-2 font-montserrat text-sm md:text-base rounded-lg transition-all duration-300 border-2 
+    className={ `inline-flex items-center gap-2 px-4 py-2 text-sm sm:text-base rounded-lg transition-all duration-300 border-2 
       text-cyan-500 border-cyan-500 
       hover:bg-cyan-500/10 dark:hover:bg-cyan-400/10
       transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-cyan-400
@@ -74,13 +74,11 @@ export default function Navbar() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => setMounted(true), []);
-
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : 'auto';
   }, [isOpen]);
@@ -102,12 +100,13 @@ export default function Navbar() {
 
   return (
     <header
+      aria-label="Main navigation"
       className={ `sticky top-0 z-50 transition-all duration-300 ${isScrolled
           ? 'bg-white/80 dark:bg-gray-950/80 backdrop-blur-lg shadow-md'
           : 'bg-white dark:bg-gray-950'
         }` }
     >
-      <div className="max-w-5xl mx-auto flex items-center justify-between px-4 py-3 md:px-6">
+      <div className="w-full max-w-7xl mx-auto flex items-center justify-between px-4 py-3 sm:px-6">
         <Logo />
 
         {/* Desktop Navigation */ }
@@ -146,7 +145,7 @@ export default function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={ label }
-              className="text-gray-500 dark:text-gray-400 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors"
+              className="p-2 rounded-full text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition"
             >
               <Icon size={ 22 } />
             </a>
@@ -154,7 +153,7 @@ export default function Navbar() {
           <button
             onClick={ () => setTheme(theme === 'dark' ? 'light' : 'dark') }
             aria-label="Toggle Theme"
-            className="p-2 rounded-full text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+            className="p-2 rounded-full text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition"
           >
             { theme === 'dark' ? <FiSun size={ 22 } /> : <FiMoon size={ 22 } /> }
           </button>
@@ -180,16 +179,16 @@ export default function Navbar() {
             animate="open"
             exit="closed"
             variants={ mobileMenuVariants }
-            className="absolute top-0 left-0 w-full h-screen bg-white/95 dark:bg-gray-950/95 backdrop-blur-md md:hidden"
+            className="absolute top-0 left-0 w-full h-screen overflow-y-auto bg-white/95 dark:bg-gray-950/95 backdrop-blur-md md:hidden"
           >
-            <nav className="flex flex-col items-center justify-center h-full space-y-8 px-4 font-poppins">
+            <nav className="flex flex-col items-center justify-center h-full space-y-6 px-6 text-center">
               { navItems.map(({ label, href }) => (
                 <Link
                   key={ label }
                   href={ href }
                   onClick={ () => setIsOpen(false) }
                   aria-current={ pathname === href ? 'page' : undefined }
-                  className={ `text-2xl w-full text-center transition-colors ${pathname === href
+                  className={ `text-2xl w-full transition-colors ${pathname === href
                       ? 'font-bold text-cyan-500 dark:text-cyan-400'
                       : 'text-gray-700 dark:text-gray-300 hover:text-cyan-500 dark:hover:text-cyan-400'
                     }` }
@@ -198,7 +197,7 @@ export default function Navbar() {
                 </Link>
               )) }
               <div className="border-t border-gray-200 dark:border-gray-700 w-1/2 my-4" />
-              <div className="flex items-center justify-center gap-8 font-nunito">
+              <div className="flex items-center justify-center gap-6">
                 { socialLinks.map(({ label, href, icon: Icon }) => (
                   <a
                     key={ label }
@@ -206,7 +205,7 @@ export default function Navbar() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={ label }
-                    className="text-gray-500 dark:text-gray-400 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors"
+                    className="p-2 rounded-full text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition"
                   >
                     <Icon size={ 28 } />
                   </a>
@@ -214,12 +213,12 @@ export default function Navbar() {
                 <button
                   onClick={ () => setTheme(theme === 'dark' ? 'light' : 'dark') }
                   aria-label="Toggle Theme"
-                  className="p-2 rounded-full text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                  className="p-2 rounded-full text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition"
                 >
                   { theme === 'dark' ? <FiSun size={ 28 } /> : <FiMoon size={ 28 } /> }
                 </button>
               </div>
-              <ResumeButton className="mt-6 w-full max-w-xs text-lg" />
+              <ResumeButton className="mt-6 w-full max-w-xs text-base sm:text-lg" />
             </nav>
           </motion.div>
         ) }
