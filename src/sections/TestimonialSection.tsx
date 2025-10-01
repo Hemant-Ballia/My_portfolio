@@ -78,6 +78,8 @@ export default function TestimonialSection() {
 
       {/* ✅ Feedback Form embedded below */ }
       <FeedbackForm />
+      <hr className="w-full h-px my-10 bg-white/10 backdrop-blur-sm border-0" />
+
     </section>
   );
 }

@@ -66,6 +66,9 @@ export default function BlogSection() {
           </motion.div>
         )) }
       </div>
+      <hr className="w-full h-px mt-16 bg-white/10 backdrop-blur-sm border-0" />
+
+
     </section>
   );
 }
