@@ -6,7 +6,7 @@ import AchievementsSection from '@/sections/AchievementsSection';
 import StatsSection from '@/sections/StatsSection';
 import TestimonialSection from '@/sections/TestimonialSection';
 import PricingSection from '@/sections/PricingSection';
-import BlogSection from '@/sections/BlogSection';
+
 
 export default function Home() {
   return (
@@ -19,7 +19,7 @@ export default function Home() {
       <StatsSection />          {/* Impact in numbers */ }
       <TestimonialSection />    {/* Social proof */ }
       <PricingSection />        {/* Conversion CTA */ }
-      <BlogSection />           {/* Thought leadership */ }
+     
     </>
   );
 }

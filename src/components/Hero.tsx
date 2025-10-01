@@ -75,7 +75,7 @@ const itemVariants: Variants = {
     opacity: 1,
     transition: {
       duration: 0.6,
-      ease: [0.25, 0.1, 0.25, 1], // ✅ FIXED: Valid easing array
+      ease: [0.25, 0.1, 0.25, 1],
     },
   },
 };
@@ -83,8 +83,8 @@ const itemVariants: Variants = {
 // --- Main Hero Component ---
 export default function Hero() {
   const roles = [
-    'Frontend Developer',
-    'UI/UX Enthusiast',
+    'web Developer',
+    'UI/UX Designer',
     'Data Analyst',
     'Open-Source Contributor',
   ];
@@ -94,7 +94,8 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative w-full min-h-screen flex items-center justify-center text-white overflow-hidden bg-cover bg-center bg-no-repeat p-4"
+
+      className="relative w-full h-screen sm:min-h-screen flex items-center justify-center text-white overflow-hidden bg-cover bg-center bg-no-repeat p-4"
       style={ { backgroundImage: `url('${backgroundImageUrl}')` } }
       role="region"
       aria-label="Hero Section"

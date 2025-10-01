@@ -9,17 +9,23 @@ type Props = {
   avatarUrl?: string;
 };
 
-export default function Testimonial({ name, role, quote, rating = 4, avatarUrl }: Props) {
+export default function Testimonial({
+  name,
+  role,
+  quote,
+  rating = 4,
+  avatarUrl,
+}: Props) {
   return (
-    <div className="flex flex-col items-center text-center font-nunito p-4">
+    <div className="w-full max-w-md sm:max-w-lg lg:max-w-xl xl:max-w-2xl mx-auto px-4 py-6 flex flex-col items-center text-center font-nunito bg-white dark:bg-slate-900 rounded-xl shadow-md transition-all duration-300">
       {/* Avatar */ }
-      <div className="w-16 h-16 rounded-full overflow-hidden mb-4 bg-gray-300 dark:bg-gray-700 flex items-center justify-center text-white font-bold text-xl flex-shrink-0">
+      <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden mb-4 bg-gray-300 dark:bg-gray-700 flex items-center justify-center text-white font-bold text-2xl sm:text-3xl flex-shrink-0">
         { avatarUrl ? (
           <Image
             src={ avatarUrl }
             alt={ name }
-            width={ 64 }
-            height={ 64 }
+            width={ 96 }
+            height={ 96 }
             className="w-full h-full object-cover"
           />
         ) : (
@@ -28,13 +34,17 @@ export default function Testimonial({ name, role, quote, rating = 4, avatarUrl }
       </div>
 
       {/* Name & Role */ }
-      {/* SUDHAR: Responsive text size (sm: se badi screen par text thoda bada hoga) */ }
-      <h3 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-white font-montserrat">{ name }</h3>
-      <p className="text-sm text-gray-500 dark:text-gray-400 font-poppins mb-2">{ role }</p>
+      <h3 className="text-xl sm:text-2xl font-semibold text-gray-800 dark:text-white font-montserrat">
+        { name }
+      </h3>
+      <p className="text-sm sm:text-base text-gray-500 dark:text-gray-400 font-poppins mb-2">
+        { role }
+      </p>
 
       {/* Quote */ }
-      {/* SUDHAR: Responsive text size */ }
-      <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 italic mb-4">“{ quote }”</p>
+      <p className="text-sm sm:text-base md:text-lg text-gray-700 dark:text-gray-300 italic mb-4 leading-relaxed">
+        “{ quote }”
+      </p>
 
       {/* Star Rating */ }
       <div className="flex gap-1">
