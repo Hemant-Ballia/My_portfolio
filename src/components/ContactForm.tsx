@@ -62,7 +62,11 @@ export default function ContactForm() {
         triggerConfetti(); 
         
         toast.success('Awesome! Message Sent!', {
-          icon: '🎉',
+          icon: (
+            <span role="img" aria-label="party">
+              🎉
+            </span>
+          ),
           style: { background: '#0f172a', color: '#fff' }
         });
 
