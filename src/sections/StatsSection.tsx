@@ -1,10 +1,9 @@
 'use client';
 
+import React from 'react';
 import { motion } from 'framer-motion';
 
-// Yeh component aapke stats data ko display karta hai
 export default function StatsSection() {
-  // Aapke stats ka data
   const stats = [
     { label: 'Projects Delivered', value: '70+', icon: 'project' },
     { label: 'Code Commits', value: '1,500+', icon: 'commit' },
@@ -12,7 +11,6 @@ export default function StatsSection() {
     { label: 'Years of Experience', value: '3+', icon: 'calendar' },
   ];
 
-  // Har stat ke liye icons
   const icons: Record<string, React.ReactNode> = {
     project: (
       <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
@@ -44,66 +42,70 @@ export default function StatsSection() {
   };
 
   return (
-    // SUDHAR 1: Full-width section aur responsive padding
-    <section className="w-full py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-950 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto">
-        {/* SUDHAR 2: Responsive text size aur consistent font */ }
-        <div className="text-center mb-12 sm:mb-16">
+    <section className="relative w-full py-20 px-6 lg:px-16 bg-white overflow-hidden">
+      {/* Background Subtle Texture */}
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.02] bg-[linear-gradient(to_right,#000_1px,transparent_1px),linear-gradient(to_bottom,#000_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="text-center mb-16">
           <motion.h2
-            initial={ { opacity: 0, y: -20 } }
-            whileInView={ { opacity: 1, y: 0 } }
-            viewport={ { once: true } }
-            transition={ { duration: 0.5 } }
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold font-sans text-gray-900 dark:text-white mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter mb-4"
           >
-            My Reach & Impact
+            My Reach & <span className="text-[#E65100]">Impact.</span>
           </motion.h2>
+          <motion.div 
+             initial={{ width: 0 }}
+             whileInView={{ width: "80px" }}
+             className="h-1 bg-[#E65100] mx-auto rounded-full mb-6"
+          />
           <motion.p
-            initial={ { opacity: 0, y: -20 } }
-            whileInView={ { opacity: 1, y: 0 } }
-            viewport={ { once: true } }
-            transition={ { duration: 0.5, delay: 0.1 } }
-            className="max-w-3xl mx-auto text-base sm:text-lg font-sans text-gray-600 dark:text-gray-400"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="max-w-2xl mx-auto text-slate-500 font-medium"
           >
-            From solo founders to global teams, my work has empowered creators across India and beyond.
+            From solo founders to global teams, my work as an <span className="text-slate-900 font-bold">INSPIRE Scholar</span> has empowered creators across India.
           </motion.p>
         </div>
 
-        {/* SUDHAR 3: Behtar responsive grid layout */ }
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
-          { stats.map((stat, i) => (
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10">
+          {stats.map((stat, i) => (
             <motion.div
-              key={ stat.label }
-              initial={ { opacity: 0, y: 30 } }
-              whileInView={ { opacity: 1, y: 0 } }
-              viewport={ { once: true } }
-              transition={ { duration: 0.5, delay: i * 0.1 } }
-              // SUDHAR 4: Consistent "glass" design jo baaki sections se match kare
-              className="text-center p-6 bg-slate-100/50 dark:bg-slate-900/50 backdrop-blur-lg border border-slate-200 dark:border-slate-800 rounded-2xl shadow-lg transition hover:-translate-y-1"
+              key={stat.label}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="group text-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm hover:shadow-xl hover:border-[#E65100]/20 transition-all duration-500"
             >
-              <svg
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={ 1.5 }
-                className="text-cyan-500 w-10 h-10 sm:w-12 sm:h-12 mb-4 mx-auto"
-                viewBox="0 0 24 24"
-              >
-                { icons[stat.icon] }
-              </svg>
-              <h3 className="text-3xl sm:text-4xl font-bold font-sans text-gray-900 dark:text-white">
-                { stat.value }
+              <div className="mb-4 flex justify-center">
+                <svg
+                  fill="none"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={1.5}
+                  className="text-[#E65100] w-12 h-12 group-hover:scale-110 transition-transform duration-300"
+                  viewBox="0 0 24 24"
+                >
+                  {icons[stat.icon]}
+                </svg>
+              </div>
+              <h3 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter">
+                {stat.value}
               </h3>
-              <p className="text-sm sm:text-base font-sans text-gray-600 dark:text-gray-400 mt-2">
-                { stat.label }
+              <p className="text-xs md:text-sm font-bold text-slate-400 uppercase tracking-[0.15em] mt-3">
+                {stat.label}
               </p>
             </motion.div>
-          )) }
+          ))}
         </div>
       </div>
-      <hr className="w-full h-px my-10 bg-white/10 backdrop-blur-sm border-0" />
-
+      
+      {/* Decorative divider for the next section */}
+      <div className="max-w-4xl mx-auto mt-20 border-t border-slate-100"></div>
     </section>
   );
 }

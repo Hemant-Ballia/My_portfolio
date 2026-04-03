@@ -1,48 +1,46 @@
-@import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Epunda+Slab:ital,wght@0,300..900;1,300..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Poppins:ital,wght@0,100..900;1,100..900&family=Space+Grotesk:wght@300..700&display=swap');
-/* Tailwind base styles */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/* Custom responsive typography */
-@media (max-width: 640px) {
-  .hero-title {
-    font-size: 1.8rem;
-    text-align: center;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white text-slate-900 antialiased;
+    margin: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
   }
 }
 
-@media (min-width: 641px) and (max-width: 1024px) {
-  .hero-title {
-    font-size: 2.5rem;
-    text-align: left;
-  }
+/* Custom Selection */
+::selection {
+  background-color: #ffedd5;
+  color: #ea580c;
 }
 
-@media (min-width: 1025px) {
-  .hero-title {
-    font-size: 3.5rem;
-  }
-}
-:root {
-  --color-primary: #4F46E5;
-  --color-secondary: #1E293B;
-  --color-accent: #10B981;
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
 }
 
-body {
-  margin: 0;
-  font-family: 'Nunito Sans', sans-serif;
-  /* 👈 Use your preferred font here */
-  background-color: var(--color-secondary);
-  color: #f3f4f6;
+::-webkit-scrollbar-track {
+  background: white;
 }
 
-nav {
-  display: flex;
-  gap: 1rem;
-  padding: 1rem;
-  background: #1a1a1a;
+::-webkit-scrollbar-thumb {
+  background: #e2e8f0;
+  border-radius: 20px;
 }
 
-section {
-  padding: 2rem;
+::-webkit-scrollbar-thumb:hover {
+  background: #ea580c;
+}
+
+/* Grid */
+.animated-grid {
+  background-image: radial-gradient(#ea580c15 1px, transparent 1px);
+  background-size: 30px 30px;
 }

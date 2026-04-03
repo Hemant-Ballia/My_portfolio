@@ -4,22 +4,23 @@ import SkillsSection from '@/sections/SkillsSection';
 import EducationSection from '@/sections/EducationSection';
 import AchievementsSection from '@/sections/AchievementsSection';
 import StatsSection from '@/sections/StatsSection';
-import TestimonialSection from '@/sections/TestimonialSection';
 import PricingSection from '@/sections/PricingSection';
-
 
 export default function Home() {
   return (
     <>
-      <Hero />                  {/* First impression */ }
-      <ProjectsSection />       {/* What you've built */ }
-      <SkillsSection />         {/* How you build */ }
-      <EducationSection />      {/* Where you learned */ }
-      <AchievementsSection />   {/* What you've earned */ }
-      <StatsSection />          {/* Impact in numbers */ }
-      <TestimonialSection />    {/* Social proof */ }
-      <PricingSection />        {/* Conversion CTA */ }
-     
+      {/* 1. Hero Section */}
+      <Hero /> 
+      
+      {/* 2. Skills Section (Ye ab ready hai, isliye on rakha hai) */}
+      {/* <SkillsSection /> */}
+
+      {/* Baaki sections abhi design hone baaki hain, isliye OFF rakhe hain */}
+      {/* <ProjectsSection /> */}
+      {/* <EducationSection /> */}
+      {/* <AchievementsSection /> */}
+      {/* <StatsSection /> */}
+      {/* <PricingSection /> */}
     </>
   );
 }

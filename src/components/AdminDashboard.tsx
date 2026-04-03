@@ -1,117 +1,162 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { FiTrash2, FiStar } from 'react-icons/fi';
+import { FiTrash2, FiStar, FiUsers, FiBarChart2 } from 'react-icons/fi'; // Naye icons
 import { toast } from 'react-toastify';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 
 type Feedback = {
-    id: number;
-    name: string;
-    role: string;
-    quote: string;
-    rating?: number;
-    avatarUrl?: string;
+  id: number;
+  name: string;
+  role: string;
+  quote: string;
+  rating?: number;
+  avatarUrl?: string;
 };
 
 export default function AdminDashboard() {
-    const [feedbacks, setFeedbacks] = useState<Feedback[]>([]);
-    const [loading, setLoading] = useState(true);
+  const [feedbacks, setFeedbacks] = useState<Feedback[]>([]);
+  const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        fetch('/api/feedback')
-            .then((res) => res.json())
-            .then((data) => setFeedbacks(data))
-            .catch(() => toast.error('Failed to load feedbacks'))
-            .finally(() => setLoading(false));
-    }, []);
+  useEffect(() => {
+    fetch('/api/feedback')
+      .then((res) => res.json())
+      .then((data) => setFeedbacks(data))
+      .catch(() => toast.error('Failed to load feedbacks'))
+      .finally(() => setLoading(false));
+  }, []);
 
-    const handleDelete = async (id: number) => {
-        const res = await fetch('/api/feedback', {
-            method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id }),
-        });
+  const handleDelete = async (id: number) => {
+    if (!confirm("Bhai, pakka delete karna hai?")) return;
 
-        if (res.ok) {
-            toast.success('Feedback deleted');
-            setFeedbacks((prev) => prev.filter((f) => f.id !== id));
-        } else {
-            toast.error('Delete failed');
-        }
-    };
+    const res = await fetch('/api/feedback', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id }),
+    });
 
-    return (
-        <section className="max-w-6xl mx-auto px-6 py-20 font-nunito">
-            <motion.h2
-                initial={ { opacity: 0, y: -20 } }
-                animate={ { opacity: 1, y: 0 } }
-                transition={ { duration: 0.5 } }
-                className="text-4xl font-bold text-center mb-12 font-grotesk text-gray-900 dark:text-white"
-            >
-                Admin Dashboard
-            </motion.h2>
+    if (res.ok) {
+      toast.success('Feedback nikal diya gaya!');
+      setFeedbacks((prev) => prev.filter((f) => f.id !== id));
+    } else {
+      toast.error('Delete fail ho gaya');
+    }
+  };
 
-            { loading ? (
-                <p className="text-center text-gray-500 dark:text-gray-400">Loading feedbacks...</p>
-            ) : feedbacks.length === 0 ? (
-                <p className="text-center text-gray-500 dark:text-gray-400">No feedbacks found.</p>
-            ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                    { feedbacks.map((f, i) => (
-                        <motion.div
-                            key={ f.id }
-                            initial={ { opacity: 0, y: 20 } }
-                            whileInView={ { opacity: 1, y: 0 } }
-                            viewport={ { once: true } }
-                            transition={ { duration: 0.4, delay: i * 0.1 } }
-                            className="bg-white dark:bg-[#0d1117]/60 backdrop-blur-md border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-md relative"
-                        >
-                            {/* Avatar */ }
-                            <div className="w-14 h-14 rounded-full overflow-hidden mb-4 bg-gray-300 dark:bg-gray-700 flex items-center justify-center text-white font-bold text-xl">
-                                { f.avatarUrl ? (
-                                    <Image
-                                        src={ f.avatarUrl }
-                                        alt={ f.name }
-                                        width={ 56 }
-                                        height={ 56 }
-                                        className="w-full h-full object-cover"
-                                    />
-                                ) : (
-                                    f.name.charAt(0)
-                                ) }
-                            </div>
+  // Stats calculate karna
+  const avgRating = feedbacks.length > 0 
+    ? (feedbacks.reduce((acc, curr) => acc + (curr.rating || 0), 0) / feedbacks.length).toFixed(1)
+    : 0;
 
-                            {/* Name & Role */ }
-                            <h3 className="text-lg font-semibold text-gray-800 dark:text-white font-montserrat">{ f.name }</h3>
-                            <p className="text-sm text-gray-500 dark:text-gray-400 font-poppins mb-2">{ f.role }</p>
+  return (
+    <section className="min-h-screen bg-[#fafafa] dark:bg-slate-950 pt-32 pb-20 px-6">
+      <div className="max-w-7xl mx-auto">
+        
+        {/* --- HEADER --- */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+          <div>
+            <h1 className="font-syne text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-2">
+              Admin <span className="text-orange-600">Console.</span>
+            </h1>
+            <p className="font-sans text-slate-500 text-sm md:text-base">
+              Manage client testimonials and platform feedback.
+            </p>
+          </div>
 
-                            {/* Quote */ }
-                            <p className="text-sm text-gray-700 dark:text-gray-300 italic mb-4">“{ f.quote }”</p>
+          {/* --- QUICK STATS --- */}
+          <div className="flex gap-4">
+            <div className="bg-white dark:bg-slate-900 p-4 px-6 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm flex items-center gap-4">
+              <div className="p-3 bg-orange-50 dark:bg-orange-900/20 rounded-xl text-orange-600">
+                <FiUsers size={20} />
+              </div>
+              <div>
+                <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">Total</p>
+                <p className="text-xl font-bold dark:text-white">{feedbacks.length}</p>
+              </div>
+            </div>
+            <div className="bg-white dark:bg-slate-900 p-4 px-6 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm flex items-center gap-4">
+              <div className="p-3 bg-amber-50 dark:bg-amber-900/20 rounded-xl text-amber-600">
+                <FiBarChart2 size={20} />
+              </div>
+              <div>
+                <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">Avg Rating</p>
+                <p className="text-xl font-bold dark:text-white">{avgRating}</p>
+              </div>
+            </div>
+          </div>
+        </div>
 
-                            {/* Rating */ }
-                            <div className="flex gap-1 mb-4">
-                                { [...Array(5)].map((_, i) => (
-                                    <FiStar
-                                        key={ i }
-                                        className={ `text-yellow-400 ${i < (f.rating || 0) ? 'opacity-100' : 'opacity-30'}` }
-                                    />
-                                )) }
-                            </div>
+        {/* --- CONTENT --- */}
+        {loading ? (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-pulse">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="h-64 bg-slate-100 dark:bg-slate-900 rounded-3xl" />
+            ))}
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <AnimatePresence>
+              {feedbacks.map((f, i) => (
+                <motion.div
+                  key={f.id}
+                  layout
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  transition={{ duration: 0.4, delay: i * 0.05 }}
+                  className="group relative bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-[2rem] p-8 shadow-sm hover:shadow-xl hover:shadow-orange-500/5 transition-all duration-500"
+                >
+                  {/* Delete Trigger */}
+                  <button
+                    onClick={() => handleDelete(f.id)}
+                    className="absolute top-6 right-6 p-2 text-slate-300 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-full transition-all opacity-0 group-hover:opacity-100"
+                  >
+                    <FiTrash2 size={18} />
+                  </button>
 
-                            {/* Delete Button */ }
-                            <button
-                                onClick={ () => handleDelete(f.id) }
-                                className="absolute top-4 right-4 text-red-500 hover:text-red-600 transition"
-                                title="Delete Feedback"
-                            >
-                                <FiTrash2 size={ 20 } />
-                            </button>
-                        </motion.div>
-                    )) }
-                </div>
-            ) }
-        </section>
-    );
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="w-14 h-14 rounded-2xl overflow-hidden bg-orange-100 dark:bg-orange-900/20 flex items-center justify-center text-orange-600 font-black text-xl border border-orange-50 dark:border-orange-800/30">
+                      {f.avatarUrl ? (
+                        <Image src={f.avatarUrl} alt={f.name} width={56} height={56} className="object-cover w-full h-full" />
+                      ) : (
+                        f.name.charAt(0)
+                      )}
+                    </div>
+                    <div>
+                      <h3 className="font-syne font-bold text-slate-900 dark:text-white">{f.name}</h3>
+                      <p className="text-xs font-medium text-slate-400 uppercase tracking-wider">{f.role}</p>
+                    </div>
+                  </div>
+
+                  <p className="font-sans text-[15px] text-slate-500 dark:text-slate-400 italic mb-6 leading-relaxed">
+                    &quot;{f.quote}&quot;
+                  </p>
+
+                  <div className="flex items-center justify-between mt-auto pt-6 border-t border-slate-50 dark:border-slate-800">
+                    <div className="flex gap-1">
+                      {[...Array(5)].map((_, starIdx) => (
+                        <FiStar
+                          key={starIdx}
+                          size={14}
+                          className={`${starIdx < (f.rating || 0) ? 'text-amber-500 fill-amber-500' : 'text-slate-200 dark:text-slate-700'}`}
+                        />
+                      ))}
+                    </div>
+                    <span className="text-[10px] font-black text-slate-300 uppercase tracking-widest">ID: #{f.id}</span>
+                  </div>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </div>
+        )}
+
+        {feedbacks.length === 0 && !loading && (
+          <div className="text-center py-20 bg-white dark:bg-slate-900 rounded-[3rem] border-2 border-dashed border-slate-100 dark:border-slate-800">
+             <p className="font-syne text-slate-400 font-bold tracking-widest uppercase">No Data Available</p>
+          </div>
+        )}
+      </div>
+    </section>
+  );
 }

@@ -1,158 +1,60 @@
 'use client';
 
-import { useRef, useState } from 'react';
-import { toast } from 'react-toastify';
-import { FiSend } from 'react-icons/fi';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useRouter } from 'next/navigation';
+import React from 'react';
+import { motion } from 'framer-motion';
 
-const WEB3FORM_KEY = process.env.NEXT_PUBLIC_WEB3FORM_ACCESS_KEY;
-
-export default function ContactForm() {
-  const formRef = useRef<HTMLFormElement>(null);
-  const [submitting, setSubmitting] = useState(false);
-  const [showSuccess, setShowSuccess] = useState(false);
-  const router = useRouter();
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setSubmitting(true);
-
-    const formData = new FormData(e.currentTarget);
-    formData.append('access_key', WEB3FORM_KEY || '');
-
-    try {
-      const response = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        body: formData,
-      });
-
-      const result = await response.json();
-
-      if (result.success) {
-        toast.success('Message sent successfully! I’ll get back to you soon.');
-        formRef.current?.reset();
-        setShowSuccess(true);
-        setTimeout(() => setShowSuccess(false), 3000);
-        setTimeout(() => router.push('/thank-you'), 1500);
-      } else {
-        throw new Error('Submission failed');
-      }
-    } catch {
-      toast.error('Something went wrong. Please try again.');
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
+export default function ContactSection() {
   return (
-    <div className="w-full p-8 bg-white/10 dark:bg-gray-900/20 backdrop-blur-lg border border-white/20 dark:border-gray-700/50 rounded-2xl shadow-lg">
-      <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
-        Contact Me
-      </h2>
+   <section class="text-gray-600 body-font relative w-full min-h-screen flex items-center">
+  <div class="absolute inset-0 bg-gray-300">
+    <iframe 
+      width="100%" 
+      height="100%" 
+      frameborder="0" 
+      marginheight="0" 
+      marginwidth="0" 
+      title="map" 
+      scrolling="no" 
+      src="https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=Prayagraj,Uttar+Pradesh" 
+      style="filter: grayscale(1) contrast(1.2) opacity(0.5); border: 0;">
+    </iframe>
+    
+    <iframe 
+      width="100%" 
+      height="100%" 
+      src="https://maps.google.com/maps?q=Prayagraj&t=&z=13&ie=UTF8&iwloc=&output=embed" 
+      frameborder="0" 
+      scrolling="no" 
+      marginheight="0" 
+      marginwidth="0"
+      style="filter: grayscale(1) contrast(1.2) opacity(0.6);">
+    </iframe>
+  </div>
 
-      <AnimatePresence>
-        { showSuccess && (
-          <motion.div
-            initial={ { scale: 0, opacity: 0 } }
-            animate={ { scale: 1, opacity: 1 } }
-            exit={ { scale: 0, opacity: 0 } }
-            className="mb-6 flex items-center justify-center text-emerald-500"
-            aria-live="polite"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-12 h-12"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={ 2 }
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-            </svg>
-            <span className="ml-3 text-lg font-semibold">Message Sent!</span>
-          </motion.div>
-        ) }
-      </AnimatePresence>
-
-      <form onSubmit={ handleSubmit } ref={ formRef } className="space-y-6" aria-label="Contact form">
-        <input type="text" name="botcheck" className="hidden" />
-
-        {/* Full Name */ }
-        <div>
-          <label htmlFor="name" className="block text-sm font-semibold tracking-wide text-gray-800 dark:text-gray-200 mb-2">
-            Full Name
-          </label>
-          <input
-            type="text"
-            name="name"
-            id="name"
-            required
-            placeholder="Your Full Name"
-            className="w-full px-4 py-3 bg-white/20 dark:bg-gray-800/30 border border-b-2 border-white/30 dark:border-gray-600/50 rounded-lg text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:outline-none focus:border-emerald-400 transition duration-300"
-          />
-        </div>
-
-        {/* Email */ }
-        <div>
-          <label htmlFor="email" className="block text-sm font-semibold tracking-wide text-gray-800 dark:text-gray-200 mb-2">
-            Email Address
-          </label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            required
-            placeholder="your.email@example.com"
-            className="w-full px-4 py-3 bg-white/20 dark:bg-gray-800/30 border border-b-2 border-white/30 dark:border-gray-600/50 rounded-lg text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:outline-none focus:border-emerald-400 transition duration-300"
-          />
-        </div>
-
-        {/* Subject */ }
-        <div>
-          <label htmlFor="subject" className="block text-sm font-semibold tracking-wide text-gray-800 dark:text-gray-200 mb-2">
-            Subject
-          </label>
-          <input
-            type="text"
-            name="subject"
-            id="subject"
-            placeholder="Portfolio, Freelance, Collaboration..."
-            className="w-full px-4 py-3 bg-white/20 dark:bg-gray-800/30 border border-b-2 border-white/30 dark:border-gray-600/50 rounded-lg text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:outline-none focus:border-emerald-400 transition duration-300"
-          />
-        </div>
-
-        {/* Message */ }
-        <div>
-          <label htmlFor="message" className="block text-sm font-semibold tracking-wide text-gray-800 dark:text-gray-200 mb-2">
-            Your Message
-          </label>
-          <textarea
-            name="message"
-            id="message"
-            required
-            rows={ 5 }
-            placeholder="Hi Hemant, I'd like to discuss a project..."
-            className="w-full px-4 py-3 bg-white/20 dark:bg-gray-800/30 border border-b-2 border-white/30 dark:border-gray-600/50 rounded-lg text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:outline-none focus:border-emerald-400 transition duration-300"
-          ></textarea>
-        </div>
-
-        {/* Submit Button */ }
-        <div className="text-center pt-4">
-          <button
-            type="submit"
-            disabled={ submitting }
-            aria-label="Send contact message"
-            className={ `w-full px-8 py-3 font-bold text-white inline-flex items-center justify-center rounded-lg shadow-lg transition-all duration-300 ${submitting
-                ? 'bg-gray-400 cursor-not-allowed'
-                : 'bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-600 hover:to-cyan-600 hover:shadow-xl transform hover:scale-105 active:scale-95'
-              }` }
-          >
-            <FiSend className="w-5 h-5 mr-2" />
-            { submitting ? 'Sending...' : 'Send Message' }
-          </button>
-        </div>
-      </form>
+  <div class="container px-5 py-24 mx-auto flex">
+    <div class="lg:w-1/3 md:w-1/2 bg-white rounded-2xl p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0 relative z-10 shadow-2xl border-t-8 border-orange-600">
+      <h2 class="text-gray-900 text-2xl mb-1 font-bold title-font tracking-tight">Get In <span class="text-orange-600">Touch</span></h2>
+      <p class="leading-relaxed mb-5 text-gray-600 text-sm">Have a project in mind? Let's build something amazing together.</p>
+      
+      <div class="relative mb-4">
+        <label for="email" class="leading-7 text-xs font-bold text-gray-500 uppercase tracking-widest">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="hemant@example.com" class="w-full bg-gray-50 rounded-xl border border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 text-base outline-none text-gray-700 py-2 px-4 transition-all duration-200 ease-in-out">
+      </div>
+      
+      <div class="relative mb-4">
+        <label for="message" class="leading-7 text-xs font-bold text-gray-500 uppercase tracking-widest">Message</label>
+        <textarea id="message" name="message" placeholder="How can I help you?" class="w-full bg-gray-50 rounded-xl border border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 h-32 text-base outline-none text-gray-700 py-2 px-4 resize-none leading-6 transition-all duration-200 ease-in-out"></textarea>
+      </div>
+      
+      <button class="text-white bg-orange-600 border-0 py-3 px-8 focus:outline-none hover:bg-orange-700 rounded-xl text-lg font-bold shadow-lg transition-all transform active:scale-95">
+        Shoot Message
+      </button>
+      
+      <p class="text-[10px] text-gray-400 mt-4 text-center italic font-medium">
+        I'll get back to you as soon as possible!
+      </p>
     </div>
+  </div>
+</section>
   );
 }

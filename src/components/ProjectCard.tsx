@@ -1,83 +1,65 @@
 'use client';
 
 import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { FiGithub, FiExternalLink, FiArrowUpRight } from "react-icons/fi";
+// Icons ko import karna mat bhoolna (as per previous message)
 
-const FiGithub = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-);
-const FiExternalLink = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-);
-
-type Props = {
-  title: string;
-  description: string;
-  tech: string;
-  image?: string;
-  github: string;
-  demo: string;
-};
-
-export default function ProjectCard({ title, description, tech, image, github, demo }: Props) {
-  const techArray = tech ? tech.split(',').map(t => t.trim()) : [];
-
+export default function ProjectCard({ project }: any) {
   return (
-    <div className="group relative flex flex-col h-full w-full bg-gradient-to-br from-[#0d1117] to-gray-900 border border-gray-800 rounded-2xl overflow-hidden shadow-xl hover:shadow-cyan-500/20 transition-all duration-300 hover:-translate-y-2">
-      <div className="absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-cyan-500 to-blue-500" />
-
-      <div className="relative w-full aspect-video overflow-hidden">
-        { image ? (
-          <Image
-            src={ image }
-            alt={ title || 'Project preview' }
-            fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
-            sizes="(max-width: 768px) 100vw, 600px"
-            priority
-          />
-        ) : (
-          <div className="bg-gray-800 h-full flex items-center justify-center text-gray-500 italic">
-            No image available
-          </div>
-        ) }
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="group relative flex flex-col h-full bg-white rounded-[32px] border border-slate-100 p-2 hover:border-orange-200 transition-all duration-500 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.05)]"
+    >
+      {/* Image Section - Light background for contrast */}
+      <div className="relative w-full aspect-[16/10] overflow-hidden rounded-[26px] bg-[#fdfdfd]">
+        <Image
+          src={project.imageUrl || '/placeholder.jpg'}
+          alt={project.title}
+          fill
+          unoptimized // Error se bachne ke liye ya config update karein
+          className="object-cover transition-transform duration-700 group-hover:scale-105"
+        />
+        
+        {/* Hover Overlay Button */}
+        <div className="absolute inset-0 flex items-center justify-center bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+           <a href={project.liveUrl} target="_blank" className="bg-white p-4 rounded-2xl shadow-xl transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+              <FiArrowUpRight size={24} className="text-orange-600" />
+           </a>
+        </div>
       </div>
 
-      <div className="p-4 sm:p-6 flex flex-col flex-grow">
-        <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">{ title }</h3>
-        <p className="text-sm sm:text-base text-gray-400 leading-relaxed mb-4">{ description }</p>
+      {/* Content Section */}
+      <div className="p-6 flex flex-col flex-grow bg-white rounded-b-[32px]">
+        <h3 className="text-2xl font-bold text-slate-900 mb-2 group-hover:text-orange-600 transition-colors tracking-tight">
+          {project.title}
+        </h3>
+        
+        <p className="text-slate-400 text-sm leading-relaxed mb-6 line-clamp-2">
+          {project.description}
+        </p>
 
-        <div className="flex flex-wrap gap-2 mb-4">
-          { techArray.map((t) => (
-            <span
-              key={ t }
-              className="px-3 py-1 text-xs sm:text-sm font-medium text-cyan-300 bg-cyan-900/30 rounded-full border border-cyan-500/20"
-            >
-              { t }
+        {/* Tech Stack - Clean Minimalist Style */}
+        <div className="flex flex-wrap gap-2 mb-8">
+          {project.techStack?.map((tech: string) => (
+            <span key={tech} className="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-500 bg-white border border-slate-100 rounded-lg group-hover:border-orange-100">
+              {tech}
             </span>
-          )) }
+          ))}
         </div>
 
-        <div className="mt-auto flex items-center justify-between gap-4 pt-4 border-t border-gray-800">
-          <a
-            href={ github }
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub repository"
-            className="flex items-center gap-2 text-cyan-400 hover:text-white transition-colors text-sm"
-          >
-            <FiGithub /> GitHub
+        {/* Actions */}
+        <div className="mt-auto flex items-center justify-between border-t border-slate-50 pt-5">
+          <a href={project.githubUrl} target="_blank" className="flex items-center gap-2 text-[11px] font-black uppercase tracking-widest text-slate-400 hover:text-black transition-all">
+            <FiGithub size={16} /> Code
           </a>
-          <a
-            href={ demo }
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Live demo"
-            className="flex items-center gap-2 text-emerald-400 hover:text-white transition-colors text-sm"
-          >
-            <FiExternalLink /> Live Demo
+          <a href={project.liveUrl} target="_blank" className="flex items-center gap-2 text-[11px] font-black uppercase tracking-widest text-orange-600 hover:tracking-[0.2em] transition-all">
+            Live View <FiExternalLink />
           </a>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

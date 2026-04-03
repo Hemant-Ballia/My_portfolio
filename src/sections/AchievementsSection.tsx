@@ -1,98 +1,135 @@
 'use client';
 
 import { motion } from 'framer-motion';
-
-// --- Chhote se icon components ---
-const TrophyIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-yellow-500 flex-shrink-0 mt-1">
-        <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" /><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" /><path d="M4 22h16" /><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" /><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" /><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
-    </svg>
-);
-
-const CertificateLinkIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="inline-block ml-1 transition-transform group-hover:translate-x-0.5">
-        <path d="m9 18 6-6-6-6" />
-    </svg>
-);
-
+import { FaTrophy, FaAward, FaGithub, FaGraduationCap } from 'react-icons/fa';
+import { SiGooglecloud } from 'react-icons/si';
 
 export default function AchievementsSection() {
+    // Real icons aur unke original colors ke saath
     const achievements = [
         {
             title: 'Foundation Certificate in CS & Data Analytics',
-            issuer: 'IIT Patna · 2025'
+            issuer: 'IIT Patna',
+            year: '2025',
+            icon: <FaGraduationCap className="text-slate-800" />, // Standard Black/Slate
+            link: 'https://cet.iitp.ac.in/moodle/mod/customcert/verify_certificate.php'
         },
         {
             title: 'Hack-n-Tech Hackathon Finalist',
-            issuer: 'IIT Patna · 2025'
+            issuer: 'IIT Patna',
+            year: '2025',
+            icon: <FaTrophy className="text-yellow-500" /> // Real Gold/Yellow Trophy
         },
         {
             title: 'ISRO Remote Sensing & GIS Workshop',
-            issuer: 'IIRS Dehradun · 2024'
+            issuer: 'IIRS Dehradun',
+            year: '2024',
+            icon: <FaAward className="text-blue-600" /> // Standard Blue for ISRO/Tech
         },
         {
-            title: 'Google Cloud Arcade Challenge Facilitator',
-            issuer: 'Google Cloud · 2025'
+            title: 'Google Cloud Arcade Legend Tier (85 Points)',
+            issuer: 'Google Cloud',
+            year: '2025',
+            icon: <SiGooglecloud className="text-[#4285F4]" /> // Original Google Cloud Blue
         },
         {
             title: 'Open Source Contributor',
-            issuer: 'GitHub · 2025–2026'
+            issuer: 'GitHub',
+            year: '2025–2026',
+            icon: <FaGithub className="text-black" /> // Original GitHub Black
         },
         {
-            title: 'Inspire Award MANAK',
-            issuer: 'DST, Govt. of India · 2023',
+            title: 'Inspire Scholarship (Top 1% UP Board)',
+            issuer: 'DST, Govt. of India',
+            year: '2023',
+            icon: <FaTrophy className="text-yellow-500" />, // Real Gold Trophy
             link: '/assets/certificates/inspire.pdf',
         },
     ];
 
     return (
-        // SUDHAR 1: Full-width section aur responsive padding. Isse mobile par side se space aayega.
-        <section className="w-full py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-slate-100 dark:bg-[#111827] transition-colors duration-300">
-            <div className="max-w-7xl mx-auto">
-                <motion.h2
-                    initial={ { opacity: 0, y: -20 } }
-                    whileInView={ { opacity: 1, y: 0 } }
-                    viewport={ { once: true } }
-                    transition={ { duration: 0.5 } }
-                    // SUDHAR 2: Responsive font size. Mobile par chhota, desktop par bada.
-                    className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-12 sm:mb-16 font-sans text-gray-900 dark:text-white"
-                >
-                    Achievements & Certifications
-                </motion.h2>
+        <section className="w-full py-24 md:py-32 px-6 lg:px-16 bg-white min-h-screen flex flex-col justify-center">
+            <div className="max-w-7xl mx-auto w-full">
+                
+                {/* --- SECTION HEADER --- */}
+                <div className="mb-20 flex flex-col items-center text-center">
+                    <motion.div 
+                        initial={{ opacity: 0, y: -20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="flex items-center gap-4 mb-6"
+                    >
+                        <div className="h-[2px] w-8 md:w-16 bg-black"></div>
+                        <span className="font-syne text-[10px] md:text-xs font-black uppercase tracking-[0.4em] text-[#FF9933]">
+                            Milestones
+                        </span>
+                        <div className="h-[2px] w-8 md:w-16 bg-black"></div>
+                    </motion.div>
 
-                {/* SUDHAR 3: Responsive grid. Mobile par 1 column, tablet par 2, aur desktop par 3. */ }
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                    { achievements.map((item, i) => (
+                    <motion.h2
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5 }}
+                        className="font-syne text-4xl md:text-6xl lg:text-7xl font-extrabold text-black tracking-tighter"
+                    >
+                        Honors & <span className="text-[#FF9933] italic">Awards.</span>
+                    </motion.h2>
+                </div>
+
+                {/* --- BENTO GRID FOR ACHIEVEMENTS --- */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                    {achievements.map((item, i) => (
                         <motion.div
-                            key={ item.title }
-                            initial={ { opacity: 0, y: 20 } }
-                            whileInView={ { opacity: 1, y: 0 } }
-                            viewport={ { once: true } }
-                            transition={ { duration: 0.5, delay: i * 0.1 } }
-                            // SUDHAR 4: Consistent "glass" design aur hover effects.
-                            className="flex items-start gap-4 p-5 bg-white/50 dark:bg-slate-900/50 backdrop-blur-lg border border-slate-200 dark:border-slate-800 rounded-xl shadow-md hover:shadow-yellow-500/20 transition-all duration-300 hover:-translate-y-1"
+                            key={i}
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: i * 0.1, ease: "easeOut" }}
+                            className="group flex flex-col justify-between p-8 bg-white border-2 border-black/5 rounded-[2rem] shadow-sm hover:shadow-[0_10px_40px_rgba(0,0,0,0.08)] transition-all duration-300 cursor-default"
                         >
-                            <TrophyIcon />
-                            <div className="flex-1">
-                                <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white font-sans">
-                                    { item.title }
+                            <div>
+                                <div className="flex items-start justify-between mb-6">
+                                    {/* Real Icon Container (Simple and Clean) */}
+                                    <div className="text-3xl drop-shadow-sm">
+                                        {item.icon}
+                                    </div>
+                                    <span className="bg-slate-50 border border-slate-200 px-3 py-1 rounded-lg font-sans text-[10px] font-black uppercase tracking-widest text-slate-500">
+                                        {item.year}
+                                    </span>
+                                </div>
+                                
+                                <h3 className="text-xl font-syne font-black text-black leading-tight mb-3">
+                                    {item.title}
                                 </h3>
-                                <p className="text-sm text-gray-600 dark:text-gray-400 font-sans mt-1">{ item.issuer }</p>
-                                { item.link && (
+                                
+                                <p className="text-sm font-sans font-bold text-slate-500 uppercase tracking-widest">
+                                    {item.issuer}
+                                </p>
+                            </div>
+
+                            {/* View Certificate CTA (Simple Black Link) */}
+                            {item.link ? (
+                                <div className="mt-8 pt-6 border-t-2 border-slate-100">
                                     <a
-                                        href={ item.link }
+                                        href={item.link}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        aria-label={ `Download certificate for ${item.title}` }
-                                        className="group mt-2 inline-flex items-center text-sm font-semibold text-emerald-600 dark:text-emerald-400 hover:underline"
+                                        className="group/link inline-flex items-center text-[11px] font-syne font-black uppercase tracking-[0.2em] text-slate-500 hover:text-black transition-colors"
                                     >
-                                        View Certificate <CertificateLinkIcon />
+                                        View Credential 
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="inline-block ml-1 transition-transform duration-300 group-hover/link:translate-x-1">
+                                            <path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>
+                                        </svg>
                                     </a>
-                                ) }
-                            </div>
+                                </div>
+                            ) : (
+                                <div className="mt-8 pt-6 border-t-2 border-transparent"></div>
+                            )}
                         </motion.div>
-                    )) }
+                    ))}
                 </div>
+
             </div>
         </section>
     );

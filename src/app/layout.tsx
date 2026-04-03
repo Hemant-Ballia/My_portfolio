@@ -1,11 +1,11 @@
-import './globals.css';
-import { ThemeProvider } from 'next-themes';
+import './globals.css'; 
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import Preloader from '@/components/Preloader';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import type { Metadata } from 'next';
-import { Poppins } from 'next/font/google';
+import { Poppins, Syne } from 'next/font/google';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -13,9 +13,15 @@ const poppins = Poppins({
   variable: '--font-poppins',
 });
 
+const syne = Syne({
+  subsets: ['latin'],
+  weight: ['700', '800'],
+  variable: '--font-syne',
+});
+
 export const metadata: Metadata = {
   title: 'Hemant Chauhan - Portfolio',
-  description: 'Full Stack Developer Portfolio',
+  description: 'Full Stack Developer & Data Analyst Portfolio',
   icons: {
     icon: '/favicon.ico',
   },
@@ -23,32 +29,25 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning className="scroll-smooth">
-      <body className={ `${poppins.variable} font-sans flex flex-col min-h-screen bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 transition-colors duration-300` }>
-        <div className="fixed inset-0 z-[-10] bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] dark:bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:16px_16px]"></div>
+    <html lang="en" className={`${poppins.variable} ${syne.variable} scroll-smooth`}>
+      {/* DIRECT BODY PAR FLEX: Ab koi wrapper nahi hai ise rokne ke liye */}
+      <body className="flex flex-col min-h-screen font-sans antialiased bg-white text-slate-800 relative">
+        
+        <Preloader />
 
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <Navbar />
-          {/* === FIX YAHAN HAI === */ }
-          {/* Maine 'main' tag se saari container aur padding classes hata di hain. */ }
-          {/* Ab yeh 'main' tag poori width lega aur aapke page ke sections (jaise Hero) bhi poori width le payenge. */ }
-          <main className="flex-grow w-full">
-            { children }
-          </main>
-          <Footer />
-          <ToastContainer
-            position="bottom-right"
-            autoClose={ 5000 }
-            hideProgressBar={ false }
-            newestOnTop={ false }
-            closeOnClick
-            rtl={ false }
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="colored"
-          />
-        </ThemeProvider>
+        {/* Dotted Background */}
+        <div className="fixed inset-0 z-[-10] bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:32px_32px] opacity-50 pointer-events-none"></div>
+
+        <Navbar />
+        
+        {/* Main Content (flex-grow saari bachi jagah le lega) */}
+        <main className="flex-grow w-full flex flex-col">
+          {children}
+        </main>
+        
+        <Footer />
+
+        <ToastContainer position="bottom-right" theme="colored" />
       </body>
     </html>
   );
