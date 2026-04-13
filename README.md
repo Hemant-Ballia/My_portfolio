@@ -1,4 +1,4 @@
-# Hemant Chauhan – Portfolio
+# My-Portfolio
 
 This is a [Next.js](https://nextjs.org) portfolio project built with the App Router and Tailwind CSS. It showcases my work as a full-stack developer and creative technologist from IIT Patna.
 
